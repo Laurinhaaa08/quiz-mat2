@@ -60,6 +60,27 @@ function startQuiz (){
     showQuestion();
 }
 
-function showQuestion() [
+function resetState(){
+    nextButton.style.display = "none";
+    while (answersButtons.firstChild) {
+        answersButtons.removeChild(answersButtons.firstChild);
+    }
+}
+
+function showQuestion() {
+    resetState();
     let currentQuestion = questions[currentQuestionIndex];
-]
+    let questionNo = currentQuestionIndex + 1;
+    questionElement.innerHTML = questionNo + "." + currentQuestion.question;
+
+    currentQuestion.answers.forEach((answer) => {
+      const button = document.createElement("button");
+      button.innerHTML = answer.text;
+      button.detaset.id_da_resposta = answer.id;
+      button.classList.add("btn");
+      button.addEventListener("click",selectAnswer);
+      answersButtons.appendChild(button);
+    })
+}
+   
+startQuiz();
